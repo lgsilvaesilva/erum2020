@@ -34,20 +34,21 @@ png('garlic-00.png')
 par(mar = rep(0, 4), bg = 'black')
 plot(garlic)
 dev.off()
+
 plot(xx, add = T, border = 'gray60', col = NA)  
 
-png(sprintf('garlic-%s.png', formatC(i, digits = 2, 2, flag = '0')))
-par(mar = rep(0, 4), bg = 'transparent')
-plot(garlic)
-plot(do.call(c, xx[1:i]), add = T, border = 'gray60', col = scales::alpha('indianred', .3))  
-dev.off()
+# png(sprintf('garlic-%s.png', formatC(i, digits = 2, 2, flag = '0')))
+# par(mar = rep(0, 4), bg = 'transparent')
+# plot(garlic)
+# plot(do.call(c, xx[1:i]), add = T, border = 'gray60', col = scales::alpha('indianred', .3))  
+# dev.off()
 
 set.seed(1)
 for(i in 1:length(xx)) {
   png(sprintf('garlic-%s.png', formatC(i, digits = 2, 2, flag = '0')))
   par(mar = rep(0, 4), bg = 'black')
   plot(garlic)
-  plot(do.call(c, xx[1:i]), add = T, border = 'gray60', col = scales::alpha('indianred', .3))  
+  plot(do.call(c, xx[1:i]), add = T, border = 'gray60', col = scales::alpha('#61acf0', .3))  
   dev.off()
 }
 

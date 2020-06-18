@@ -167,7 +167,7 @@ background-color: black
 ]
 
 .pull-right[ 
-# .center[<img src="img/garlic.gif" width="70%" align="center" />]
+# .center[<img src="img/garlic-blue.gif" width="70%" align="center" />]
 ]
 
 ---
