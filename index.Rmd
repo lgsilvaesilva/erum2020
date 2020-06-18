@@ -163,7 +163,7 @@ class: center, middle, inverse
 background-color: black
 
 .pull-left[
-# .salt[.fancy[Voronoi Tesselation]]
+# .salt[.fancy[Voronoi Tessellation]]
 ]
 
 .pull-right[ 
