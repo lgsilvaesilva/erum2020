@@ -31,7 +31,7 @@ v <- do.call(c, st_geometry(cents_garlic_sf))
 xx <- st_voronoi(v, dTolerance = 1)
 
 png('garlic-00.png')
-par(mar = rep(0, 4), bg = 'transparent')
+par(mar = rep(0, 4), bg = 'black')
 plot(garlic)
 dev.off()
 plot(xx, add = T, border = 'gray60', col = NA)  
@@ -44,10 +44,10 @@ dev.off()
 
 set.seed(1)
 for(i in 1:length(xx)) {
-  # png(sprintf('garlic-%s.png', formatC(i, digits = 2, 2, flag = '0')))
-  par(mar = rep(0, 4), bg = 'transparent')
+  png(sprintf('garlic-%s.png', formatC(i, digits = 2, 2, flag = '0')))
+  par(mar = rep(0, 4), bg = 'black')
   plot(garlic)
   plot(do.call(c, xx[1:i]), add = T, border = 'gray60', col = scales::alpha('indianred', .3))  
-  # dev.off()
+  dev.off()
 }
 
