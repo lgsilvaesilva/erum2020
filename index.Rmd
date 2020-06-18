@@ -1,0 +1,252 @@
+---
+title: "Voronoi Linkage for Spatially Misaligned Data"
+subtitle: "How to transfer knowledge from areas to points?"
+author: "Luís Silva e Silva"
+date: '`r format(as.Date("2020-06-18"), "%dth %B %Y")`'
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/sfah.css", "css/fonts.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false 
+    includes:
+      in_header: header.html
+---
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(knitr)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+# options(knitr.table.format = "html")
+library(tidyverse)
+library(babynames)
+library(fontawesome) # from github: https://github.com/rstudio/fontawesome
+library(DiagrammeR)
+```
+
+layout: true
+  
+<div class="my-footer"><span>lgsilvaesilva.github.io/slides/erum2020</span></div>
+
+<!-- this adds the link footer to all slides, depends on my-footer class in css-->
+
+---
+name: xaringan-title
+class: left
+
+# Voronoi Linkage for Spatially Misaligned Data
+
+<img src="https://raw.githubusercontent.com/voronoys/voronoys_sc/master/www/img/logo.png" alt="Sharingan" width="200" />
+
+### .fancy[How to transfer knowledge from areas to points?]
+
+.large[Luís Silva e Silva | e-Rum 2020 | `r Sys.Date()`]
+
+<!-- this ends up being the title slide since seal = FALSE-->
+
+---
+
+class: right, middle
+
+<img class="circle" src="img/myphoto.png" width="150px"/>
+
+### Find me at...
+
+[`r fa(name = "twitter")` @lgsilvaesilva](http://twitter.com/lgsilvaesilva)  
+[`r fa(name = "github")` @lgsilvaesilva](http://github.com/lgsilvaesilva)  
+[`r fa(name = "link")` lgsilvaesilva.github.io](https://lgsilvaesilva.github.io)  
+[`r fa(name = "paper-plane")` lgsilvaesilva@gmail.com](mailto:lgsilvaesilva@gmail.com)
+
+---
+name: electoral-system
+class: center, middle, inverse
+
+.pull-left[
+# Brazilian <br>  .salt[.fancy[Electoral System]]
+]
+
+.pull-right[
+
+# <br> `r fa("vote-yea", fill = "#AAAAAA", height = 250) `
+
+]
+
+---
+name: motivation
+class: left, middle, inverse
+background-image: url(img/cover-map.png)
+background-size: cover
+
+- In Brazil there are three main political levels:
+
+  1. Federal (president)
+  1. State (governor)
+  1. Municipality (mayor)
+
+--
+
+- The chief of each level is elected to a four-year term by .heatinline[absolute majority vote].  
+
+--
+
+- At state and federal levels a second-round might be needed.
+
+--
+
+- The .heatinline[mandatory voting] is for people with age between 18 and 65-year-old.
+
+
+---
+name: electoral-section
+class: left, top
+
+## Electoral section
+
+.pull-left[
+.center[<img src="img/bh-secao.png" width="60%" align="center" />]
+
+The electoral sections for .saltinline[Belo Horizonte, Minas Gerais]. 
+]
+
+.pull-right[
+- The place where the voters go to declare their vote.
+
+- Usually, this place is a school or a community center.
+
+- Each voter must attend to Electoral Section assigned.
+
+- The assign of the electoral section to the voter is based on its home address.
+
+.center[<img style="border-radius:10%;" src="img/votacao-secao.JPG" width="45%" align="center" />]
+]
+
+---
+name: electoral-section
+class: center, middle
+
+.pull-left[
+.center[<img src="img/bh-secao.png" width="60%" align="center" />]
+]
+
+.pull-right[
+## How can we extract data from <br> .heat[.fancy[Areas to Points?]] 
+]
+
+---
+name: naive
+class: center, middle, inverse
+
+.pull-left[
+.center[<img src="img/naive.png" width="100%" align="center" />]
+]
+
+.pull-right[
+
+.salt[Naive approach]
+
+.left[
+- Each point gets the information from only one area, i.e., the area which the point belongs.
+
+- .fatinline[9.884%] of census tracts used, while the percentage of the total population of the city used is .fatinline[11.98%].
+]
+
+
+]
+
+---
+name: voronoi
+class: center, middle, inverse
+
+.pull-left[
+# .salt[.fancy[Voronoi Tesselation]]
+]
+
+.pull-right[ 
+# .center[<img src="img/garlic-voronoi-bb.png" width="70%" align="center" />]
+]
+
+---
+name: voronoi
+class: center, middle, inverse
+
+.pull-left[
+.center[<img src="img/voronoi.png" width="150%" align="center" />]
+]
+
+.pull-right[
+
+.salt[Voronoi approach]
+
+.left[
+- It is created a voronoi cell for each point (electoral section).
+
+- Now, each point is represented by a cell. 
+
+- The information is transferred .acidinline[proportionally the area intersection].
+]
+]
+
+---
+name: inter
+class: center, middle
+
+.center[<img src="img/poly_inter2.gif" width="50%" align="center" />]
+
+---
+name: motivation-question
+class: center, middle, inverse
+
+.pull-left[
+# How are your <br>  .acid[.fancy[neighbours voting?]]
+]
+
+.pull-right[
+
+# <br> `r fa("search-location", fill = "#AAAAAA", height = 250) `
+
+]
+
+---
+name: electoral-data
+class: center, top
+
+## Spatial correlation
+
+.center[<img src="img/Fig_1.png" width="80%" align="center" />]
+
+---
+name: electoral-data
+class: center, top
+
+## % votes Bolsonaro x avg. income
+
+.center[<img src="img/Fig_2.png" width="80%" align="center" />]
+
+---
+name: conclusion
+class: letf, top
+
+# Conclusion
+
+- Our approach seems efficient to aggregate information from areas to points;
+
+- It provides analysis at a high level of detail;
+
+- Also can improve the interpretation of geostatistical data for those who are not familiar with that
+
+---
+name: me
+class: right, middle
+
+<img style="border-radius:20%;" src="img/myphoto.png" width="150px"/>
+
+.salt[Thank you!]
+
+[`r fa(name = "twitter")` @lgsilvaesilva](http://twitter.com/lgsilvaesilva)  
+[`r fa(name = "github")` @lgsilvaesilva](http://github.com/lgsilvaesilva)  
+[`r fa(name = "link")` lgsilvaesilva.github.io](https://lgsilvaesilva.github.io)  
+[`r fa(name = "paper-plane")` lgsilvaesilva@gmail.com](mailto:lgsilvaesilva@gmail.com)
